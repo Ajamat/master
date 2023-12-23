@@ -103,13 +103,24 @@ frappe.ui.form.on("Beneficiary", {
         }
     },
     pan: function(frm) {
-        // Get the value of the PAN field
         
         var pan = frm.doc.pan;
+        console.log(pan)
         var panPattern = /[A-Z]{5}[0-9]{4}[A-Z]{1}/;
 
         if (!panPattern.test(pan) && pan.length >=10) {
             frappe.show_alert({message:'Please enter a valid PAN. ref:ABCDE1234E', indicator: 'yellow'});
+            frappe.validated = 0;
+        }
+    },
+    adhar: function(frm) {
+        var aadhar = frm.doc.adhar;
+        console.log(aadhar)
+
+        var aadharPattern = /(^[0-9]{4}[0-9]{4}[0-9]{4}$)|(^[0-9]{4}\s[0-9]{4}\s[0-9]{4}$)|(^[0-9]{4}-[0-9]{4}-[0-9]{4}$)/;
+
+        if (!aadharPattern.test(aadhar) && aadhar.length >=12) {
+            frappe.show_alert({message:'Please enter a valid Aadhar number. ref:125436527896', indicator: "red"});
             frappe.validated = 0;
         }
     }
